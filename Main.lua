@@ -6,7 +6,7 @@ if syn then
 game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
     if string.sub(msg, 1, 9) == ("/e rchat ") then
         local mainString = string.gsub(msg, "/e rchat", "")
-        local chatString = "<rainbow=chat> [" .. game:GetService("Players").LocalPlayer.Name .. "]: " .. mainString
+        local chatString = "<rainbow=chat> [" .. game:GetService("Players").LocalPlayer.DisplayName .. "]: " .. mainString
         local args = {
             [1] = chatString,
             [2] = "All"
