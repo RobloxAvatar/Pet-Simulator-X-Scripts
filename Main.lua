@@ -15,6 +15,16 @@ game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
     end
 end)
 
+game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
+    if msg == "/e codes" then
+        if syn then
+            syn.write_clipboard("https://progameguides.com/roblox/roblox-pet-simulator-x-codes/")
+        else
+            setclipboard("https://progameguides.com/roblox/roblox-pet-simulator-x-codes/")
+        end
+    end
+end)
+
 local gmppath = require(game:GetService("ReplicatedStorage").Framework.Modules.Client["5 | Gamepasses"])
 gmppath.Owns = function() return true end
 
