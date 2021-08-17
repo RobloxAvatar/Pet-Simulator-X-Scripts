@@ -1,8 +1,6 @@
 getgenv().bind = "q" --// choose a keybind
 getgenv().bordToggled = false --// dont change this
 
-if syn then
-
 game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
     if string.sub(msg, 1, 9) == ("/e rchat ") then
         local mainString = string.gsub(msg, "/e rchat", "")
@@ -49,4 +47,3 @@ game:GetService("UserInputService").InputBegan:Connect(function(i)
         end
     end
 end)
-end
