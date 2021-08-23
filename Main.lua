@@ -13,8 +13,8 @@ if not isfile("Pet-SimX-Keybind.lua") then
    	     if string.sub(msg, 1, 9) == ("/e hbind ") then
       		local mainString = string.gsub(msg, "/e hbind ", "")
       		getgenv().bind = mainString
-      		v1.Message.New("Successfully Binded! Keybind: " .. string.upper(getgenv().bind))
 		writefile("Pet-SimX-Keybind.lua", mainString)
+      		v1.Message.New("Successfully Binded! Keybind: " .. string.upper(getgenv().bind))
 		getgenv().justExecuted = true
    	    end
 	end)
