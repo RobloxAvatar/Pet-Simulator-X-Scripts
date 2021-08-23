@@ -1,6 +1,4 @@
-repeat wait() until game:IsLoaded()
-
-getgenv().bind = "" --// choose a keybind
+getgenv().bind = "" or readfile("Pet-Sim-Keybind.json") --// choose a keybind
 getgenv().bordToggled = false --// dont change this
 getgenv().justExecuted = true
 
@@ -8,6 +6,8 @@ function Notify(txt)
     local v1 = require(game:GetService("ReplicatedStorage"):WaitForChild("Framework"):WaitForChild("Library"))
     v1.Message.New(txt)
 end
+
+Notfiy("hi?")
 
 if isfile("Pet-Sim-Keybind.json") then
     getgenv().bind = readfile("Pet-Sim-Keybind.json")
