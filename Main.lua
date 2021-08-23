@@ -19,6 +19,7 @@ game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
       	v1.Message.New("Successfully Binded! Keybind: " .. string.upper(getgenv().bind))
 	wait(1.25)
 	writefile("Pet-SimX-Keybind.lua", mainString)
+	getgenv().justExecuted = true
     end
 end)
 
