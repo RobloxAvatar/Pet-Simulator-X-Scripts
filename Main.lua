@@ -3,7 +3,7 @@ getgenv().bordToggled = false --// dont change this
 getgenv().justExecuted = true
 
 function Notify(txt)
-    local v1 = require(game:GetService("ReplicatedStorage"):WaitForChild("Framework"):WaitForChild("Library"))
+    local v1 = require(game:GetService("ReplicatedStorage").Framework.Libary)
     v1.Message.New(txt)
 end
 
