@@ -1,5 +1,29 @@
-getgenv().bind = "q" --// choose a keybind
+getgenv().bind = "" --// choose a keybind
 getgenv().bordToggled = false --// dont change this
+getgenv().justExecuted = true
+
+function Notify(txt)
+    local v1 = require(game:GetService("ReplicatedStorage"):WaitForChild("Framework"):WaitForChild("Library"))
+    v1.Message.New(txt);
+end
+
+if isfile("Pet-Sim-Keybind.json") then
+    getgenv().bind = readfile("Pet-Sim-Keybind.json")
+    Notifiy("Thanks for using this script! \n Welcome " .. game:GetService("Players").Localplayer.DisplayName)
+else
+    if getgenv().justExecuted == true then
+    	game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
+	    if string.sub(msg, 1, 8) == ("/e bind ") then
+	      local mainString = string.gsub(msg, "/e bind ", "")
+	      writefile("Pet-Sim-Keybind.json", mainString)
+	      getgenv().bind = mainString or readfile("Pet-Sim-Keybind.json")
+	      getgenv().justExecuted = false
+	      Notifiy("Successfully Binded! \n Keybind: " .. getgenv().bind or readfile("Pet-Sim-Keybind.json"))
+	  end
+      end)
+   end
+end
+
 
 game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
     if string.sub(msg, 1, 9) == ("/e rchat ") then
