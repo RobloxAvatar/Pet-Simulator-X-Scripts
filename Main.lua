@@ -2,25 +2,29 @@ getgenv().bind = "" --// choose a keybind
 getgenv().bordToggled = false --// dont change this
 getgenv().justExecuted = false
 
+local gmppath = require(game:GetService("ReplicatedStorage").Framework.Modules.Client["5 | Gamepasses"])
+gmppath.Owns = function() return true end
+
 local v1 = require(game.ReplicatedStorage:WaitForChild("Framework"):WaitForChild("Library"))
 
 if not isfile("Pet-SimX-Keybind.lua") then
    if justExecuted == false then
-    	v1.Message.New("No saved keybind found! Please try /e hbind KEYBINDHERE!")
-	game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
-   	     if string.sub(msg, 1, 9) == ("/e hbind ") then
-      		local mainString = string.gsub(msg, "/e hbind ", "")
-      		getgenv().bind = mainString
-      		v1.Message.New("Successfully Binded! Keybind: " .. string.upper(getgenv().bind))
-		getgenv().justExecuted = true
-		wait(1.25)
-		v1.Message.New("Thanks for using this script! Welcome " .. game:GetService("Players").LocalPlayer.DisplayName .. "!")
-		wait(1.25)
-		writefile("Pet-SimX-Keybind.lua", mainString)
-   	    end
-	end)
+       v1.Message.New("No saved keybind found! Please try /e hbind KEYBINDHERE!")
    end
 end
+
+game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
+     if string.sub(msg, 1, 9) == ("/e hbind ") then
+        local mainString = string.gsub(msg, "/e hbind ", "")
+      	getgenv().bind = mainString
+      	v1.Message.New("Successfully Binded! Keybind: " .. string.upper(getgenv().bind))
+	getgenv().justExecuted = true
+	wait(1.25)
+	v1.Message.New("Thanks for using this script! Welcome " .. game:GetService("Players").LocalPlayer.DisplayName .. "!")
+	wait(1.25)
+	writefile("Pet-SimX-Keybind.lua", mainString)
+    end
+end)
 
 if isfile("Pet-SimX-Keybind.lua") then
    getgenv().bind = readfile("Pet-SimX-Keybind.lua")
@@ -62,9 +66,6 @@ game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/inceldom/uwu/main/petsimxbot",true))()	
     end
 end)
-
-local gmppath = require(game:GetService("ReplicatedStorage").Framework.Modules.Client["5 | Gamepasses"])
-gmppath.Owns = function() return true end
 
 game:GetService("UserInputService").InputBegan:Connect(function(i)
     if i.KeyCode == Enum.KeyCode[string.upper(getgenv().bind)] then
