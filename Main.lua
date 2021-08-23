@@ -1,28 +1,17 @@
-getgenv().bind = "" --// choose a keybind
+getgenv().bind = "q" --// choose a keybind
 getgenv().bordToggled = false --// dont change this
-getgenv().justExecuted = true
 
-local v1 = require(game.ReplicatedStorage:WaitForChild("Framework"):WaitForChild("Library"));
+local v1 = require(game.ReplicatedStorage:WaitForChild("Framework"):WaitForChild("Library"))
 
-if isfile("Pet-Sim-Keybind.json") then
-    getgenv().bind = readfile(game:GetService("HttpService"):JSONDecode("Pet-Sim-Keybind.json"))
-    v1.Message.New("Thanks for using this script! Welcome " .. game:GetService("Players").LocalPlayer.DisplayName .. "!")
-else
-if not isfile("Pet-Sim-Keybind.json") then
-    v1.Message.New("No Keybind Found! Please use /e bind to pick a keybind!")
-    game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
-        if string.sub(msg, 1, 8) == ("/e bind ") then
-	  local mainString = string.gsub(msg, "/e bind ", "")
-	  writefile("Pet-Sim-Keybind.json", mainString)
-	  getgenv().bind = mainString or readfile(game:GetService("HttpService"):JSONDecode("Pet-Sim-Keybind.json"))
-	  getgenv().justExecuted = false
-	  v1.Message.New("Successfully Binded! \n Keybind: " .. getgenv().bind or readfile(game:GetService("HttpService"):JSONDecode("Pet-Sim-Keybind.json")))
-       end
-   end)
-end
-	
-repeat wait() until getgenv().bind ~= ""
+v1.Message.New("Thanks for using this script! Welcome " .. game:GetService("Players").LocalPlayer.DisplayName .. "!")
 
+game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
+   if string.sub(msg, 1, 9) == ("/e hbind ") then
+      local mainString = string.gsub(msg, "/e hbind ", "")
+      getgenv().bind = mainString
+      v1.Message.New("Successfully Binded! Keybind: " .. getgenv().bind)
+   end
+end)
 
 game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
     if string.sub(msg, 1, 9) == ("/e rchat ") then
