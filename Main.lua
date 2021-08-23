@@ -6,7 +6,7 @@ local v1 = require(game.ReplicatedStorage:WaitForChild("Framework"):WaitForChild
 
 if isfile("Pet-Sim-Keybind.json") then
     getgenv().bind = readfile("Pet-Sim-Keybind.json")
-    v1.Message.New("Thanks for using this script! Welcome " .. game:GetService("Players").Localplayer.DisplayName)
+    v1.Message.New("Thanks for using this script! Welcome " .. game:GetService("Players").LocalPlayer.DisplayName .. "!")
 else
 if not isfile("Pet-Sim-Keybind.json") then
     v1.Message.New("No Keybind Found! Please use /e bind to pick a keybind!")
