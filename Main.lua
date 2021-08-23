@@ -8,9 +8,8 @@ gmppath.Owns = function() return true end
 local v1 = require(game.ReplicatedStorage:WaitForChild("Framework"):WaitForChild("Library"))
 
 if not isfile("Pet-SimX-Keybind.lua") then
-   if justExecuted == false then
-       v1.Message.New("No saved keybind found! Please try /e hbind KEYBINDHERE!")
-   end
+    v1.Message.New("No saved keybind found! Please try /e hbind KEYBINDHERE!")
+    getgenv().justExecuted = true
 end
 
 game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
@@ -18,9 +17,6 @@ game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
         local mainString = string.gsub(msg, "/e hbind ", "")
       	getgenv().bind = mainString
       	v1.Message.New("Successfully Binded! Keybind: " .. string.upper(getgenv().bind))
-	getgenv().justExecuted = true
-	wait(1.25)
-	v1.Message.New("Thanks for using this script! Welcome " .. game:GetService("Players").LocalPlayer.DisplayName .. "!")
 	wait(1.25)
 	writefile("Pet-SimX-Keybind.lua", mainString)
     end
@@ -28,13 +24,17 @@ end)
 
 if isfile("Pet-SimX-Keybind.lua") then
    getgenv().bind = readfile("Pet-SimX-Keybind.lua")
-   wait(1.25)
-   v1.Message.New("Thanks for using this script! Welcome " .. game:GetService("Players").LocalPlayer.DisplayName .. "!")
+   getgenv().justExecuted = true
    wait(1.25)
    v1.Message.New("Successfully Loaded Your Last Keybind! Keybind: " .. string.upper(readfile("Pet-SimX-Keybind.lua")))
 end
 
 repeat wait() until getgenv().bind ~= ""
+
+if getgenv().justExecuted == true then
+   wait(1.25)
+   v1.Message.New("Thanks for using this script! Welcome " .. game:GetService("Players").LocalPlayer.DisplayName .. "!")
+end
 
 game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
     if string.sub(msg, 1, 9) == ("/e rchat ") then
