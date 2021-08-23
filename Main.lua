@@ -2,10 +2,6 @@ getgenv().bind = "" --// choose a keybind
 getgenv().bordToggled = false --// dont change this
 getgenv().justExecuted = false
 getgenv().stop = false
-getgenv().canExecute = false
-
-local gmppath = require(game:GetService("ReplicatedStorage").Framework.Modules.Client["5 | Gamepasses"])
-gmppath.Owns = function() return true end
 
 local v1 = require(game.ReplicatedStorage:WaitForChild("Framework"):WaitForChild("Library"))
 
@@ -26,7 +22,6 @@ game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
 	   getgenv().justExecuted = true
 	end
 	writefile("Pet-SimX-Keybind.lua", mainString)
-	getgenv().canExecute = true
     end
 end)
 
@@ -35,11 +30,12 @@ if isfile("Pet-SimX-Keybind.lua") then
    wait(1.25)
    v1.Message.New("Successfully Loaded Your Last Keybind! Keybind: " .. string.upper(readfile("Pet-SimX-Keybind.lua")))
    getgenv().justExecuted = true
-   getgenv().canExecute = true
 end
 
 repeat wait() until getgenv().bind ~= ""
-repeat wait() until getgenv().canExecute == true
+
+local gmppath = require(game:GetService("ReplicatedStorage").Framework.Modules.Client["5 | Gamepasses"])
+gmppath.Owns = function() return true end
 
 if getgenv().justExecuted == true then
    wait(1.25)
