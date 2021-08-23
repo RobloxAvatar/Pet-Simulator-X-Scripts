@@ -12,6 +12,7 @@ if not isfile("Pet-SimX-Keybind.lua") then
       		local mainString = string.gsub(msg, "/e hbind ", "")
       		getgenv().bind = mainString
 		writefile("Pet-SimX-Keybind.lua", mainString)
+		repeat wait() until isfile("Pet-SimX-Keybind.lua")
       		v1.Message.New("Successfully Binded! Keybind: " .. string.upper(getgenv().bind))
 		getgenv().justExecuted = true
 		wait(1.25)
