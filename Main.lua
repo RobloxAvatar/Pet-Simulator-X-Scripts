@@ -1,6 +1,7 @@
 getgenv().bind = "" --// choose a keybind
 getgenv().bordToggled = false --// dont change this
 getgenv().justExecuted = false
+getgenv().stop = false
 
 local gmppath = require(game:GetService("ReplicatedStorage").Framework.Modules.Client["5 | Gamepasses"])
 gmppath.Owns = function() return true end
@@ -8,8 +9,10 @@ gmppath.Owns = function() return true end
 local v1 = require(game.ReplicatedStorage:WaitForChild("Framework"):WaitForChild("Library"))
 
 if not isfile("Pet-SimX-Keybind.lua") then
+    v1.Message.New("Thanks for using this script! Welcome " .. game:GetService("Players").LocalPlayer.DisplayName .. "!")
+    wait(1.25)
     v1.Message.New("No saved keybind found! Please try /e hbind KEYBINDHERE!")
-    getgenv().justExecuted = true
+    getgenv().stop = true
 end
 
 game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
@@ -18,7 +21,9 @@ game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
       	getgenv().bind = mainString
       	v1.Message.New("Successfully Binded! Keybind: " .. string.upper(getgenv().bind))
 	wait(1.25)
-	getgenv().justExecuted = true
+	if getgenv().stop == false then
+	   getgenv().justExecuted = true
+	end
 	writefile("Pet-SimX-Keybind.lua", mainString)
     end
 end)
