@@ -19,13 +19,15 @@ if not isfile("Pet-SimX-Keybind.lua") then
 		writefile("Pet-SimX-Keybind.lua", mainString)
    	    end
 	end)
-     else
-    	getgenv().bind = readfile("Pet-SimX-Keybind.lua")
-	wait(1.25)
-	v1.Message.New("Thanks for using this script! Welcome " .. game:GetService("Players").LocalPlayer.DisplayName .. "!")
-	wait(1.25)
-	v1.Message.New("Successfully Loaded Your Last Keybind! Keybind: " .. string.upper(readfile("Pet-SimX-Keybind.lua")))
    end
+end
+
+if isfile("Pet-SimX-Keybind.lua") then
+   getgenv().bind = readfile("Pet-SimX-Keybind.lua")
+   wait(1.25)
+   v1.Message.New("Thanks for using this script! Welcome " .. game:GetService("Players").LocalPlayer.DisplayName .. "!")
+   wait(1.25)
+   v1.Message.New("Successfully Loaded Your Last Keybind! Keybind: " .. string.upper(readfile("Pet-SimX-Keybind.lua")))
 end
 
 repeat wait() until getgenv().bind ~= ""
