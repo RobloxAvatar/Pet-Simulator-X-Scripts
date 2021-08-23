@@ -2,24 +2,21 @@ getgenv().bind = "" --// choose a keybind
 getgenv().bordToggled = false --// dont change this
 getgenv().justExecuted = true
 
-function Notifiy(txt)
-    local v1 = require(game.ReplicatedStorage:WaitForChild("Framework"):WaitForChild("Library"));
-    v1.Message.New(txt)
-end
+local v1 = require(game.ReplicatedStorage:WaitForChild("Framework"):WaitForChild("Library"));
 
 if isfile("Pet-Sim-Keybind.json") then
     getgenv().bind = readfile("Pet-Sim-Keybind.json")
-    Notifiy("Thanks for using this script! Welcome " .. game:GetService("Players").Localplayer.DisplayName)
+    v1.Message.New("Thanks for using this script! Welcome " .. game:GetService("Players").Localplayer.DisplayName)
 else
 if not isfile("Pet-Sim-Keybind.json") then
-    Notifiy("No Keybind Found! Please use /e bind to pick a keybind!")
+    v1.Message.New("No Keybind Found! Please use /e bind to pick a keybind!")
     game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
         if string.sub(msg, 1, 8) == ("/e bind ") then
 	  local mainString = string.gsub(msg, "/e bind ", "")
 	  writefile("Pet-Sim-Keybind.json", mainString)
 	  getgenv().bind = mainString or readfile("Pet-Sim-Keybind.json")
 	  getgenv().justExecuted = false
-          Notifiy("Successfully Binded! \n Keybind: " .. getgenv().bind or readfile("Pet-Sim-Keybind.json"))
+	  v1.Message.New("Successfully Binded! \n Keybind: " .. getgenv().bind or readfile("Pet-Sim-Keybind.json"))
        end
    end)
 end
