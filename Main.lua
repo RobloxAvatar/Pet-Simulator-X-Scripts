@@ -4,8 +4,6 @@ getgenv().justExecuted = false
 
 local v1 = require(game.ReplicatedStorage:WaitForChild("Framework"):WaitForChild("Library"))
 
-v1.Message.New("Thanks for using this script! Welcome " .. game:GetService("Players").LocalPlayer.DisplayName .. "!")
-
 if not isfile("Pet-SimX-Keybind.lua") then
    if justExecuted == false then
     	v1.Message.New("No saved keybind found! Please try /e bind KEYBINDHERE!")
@@ -16,10 +14,14 @@ if not isfile("Pet-SimX-Keybind.lua") then
 		writefile("Pet-SimX-Keybind.lua", mainString)
       		v1.Message.New("Successfully Binded! Keybind: " .. string.upper(getgenv().bind))
 		getgenv().justExecuted = true
+		wait(1.25)
+		v1.Message.New("Thanks for using this script! Welcome " .. game:GetService("Players").LocalPlayer.DisplayName .. "!")
    	    end
 	end)
      else
     	getgenv().bind = readfile("Pet-SimX-Keybind.lua")
+	v1.Message.New("Thanks for using this script! Welcome " .. game:GetService("Players").LocalPlayer.DisplayName .. "!")
+	wait(1.25)
 	v1.Message.New("Successfully Loaded Your Last Keybind! Keybind: " .. string.upper(readfile("Pet-SimX-Keybind.lua")))
    end
 end
