@@ -34,6 +34,7 @@ repeat wait() until getgenv().bind ~= ""
 if getgenv().justExecuted == true then
    wait(1.25)
    v1.Message.New("Thanks for using this script! Welcome " .. game:GetService("Players").LocalPlayer.DisplayName .. "!")
+   getgenv().bind = readfile("Pet-SimX-Keybind.lua")
 end
 
 game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
