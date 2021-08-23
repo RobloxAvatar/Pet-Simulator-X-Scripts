@@ -35,6 +35,7 @@ if isfile("Pet-SimX-Keybind.lua") then
    wait(1.25)
    v1.Message.New("Successfully Loaded Your Last Keybind! Keybind: " .. string.upper(readfile("Pet-SimX-Keybind.lua")))
    getgenv().justExecuted = true
+   getgenv().canExecute = true
 end
 
 repeat wait() until getgenv().bind ~= ""
