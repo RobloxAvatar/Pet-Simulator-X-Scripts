@@ -5,7 +5,7 @@ getgenv().justExecuted = true
 local v1 = require(game.ReplicatedStorage:WaitForChild("Framework"):WaitForChild("Library"));
 
 if isfile("Pet-Sim-Keybind.json") then
-    getgenv().bind = readfile("Pet-Sim-Keybind.json")
+    getgenv().bind = readfile(game:GetService("HttpService"):JSONDecode("Pet-Sim-Keybind.json"))
     v1.Message.New("Thanks for using this script! Welcome " .. game:GetService("Players").LocalPlayer.DisplayName .. "!")
 else
 if not isfile("Pet-Sim-Keybind.json") then
@@ -14,9 +14,9 @@ if not isfile("Pet-Sim-Keybind.json") then
         if string.sub(msg, 1, 8) == ("/e bind ") then
 	  local mainString = string.gsub(msg, "/e bind ", "")
 	  writefile("Pet-Sim-Keybind.json", mainString)
-	  getgenv().bind = mainString or readfile("Pet-Sim-Keybind.json")
+	  getgenv().bind = mainString or readfile(game:GetService("HttpService"):JSONDecode("Pet-Sim-Keybind.json"))
 	  getgenv().justExecuted = false
-	  v1.Message.New("Successfully Binded! \n Keybind: " .. getgenv().bind or readfile("Pet-Sim-Keybind.json"))
+	  v1.Message.New("Successfully Binded! \n Keybind: " .. getgenv().bind or readfile(game:GetService("HttpService"):JSONDecode("Pet-Sim-Keybind.json")))
        end
    end)
 end
