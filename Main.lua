@@ -13,6 +13,7 @@ if isfile("Pet-Sim-Keybind.json") then
     getgenv().bind = readfile("Pet-Sim-Keybind.json")
     Notifiy("Thanks for using this script! \n Welcome " .. game:GetService("Players").Localplayer.DisplayName)
 else
+Notifiy("No Keybind Found! \n Please use /e bind to pick a keybind!")
 game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
      if string.sub(msg, 1, 8) == ("/e bind ") then
 	local mainString = string.gsub(msg, "/e bind ", "")
