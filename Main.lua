@@ -2,6 +2,7 @@ getgenv().bind = "" --// choose a keybind
 getgenv().bordToggled = false --// dont change this
 getgenv().justExecuted = false
 getgenv().stop = false
+getgenv().canExecute = false
 
 local gmppath = require(game:GetService("ReplicatedStorage").Framework.Modules.Client["5 | Gamepasses"])
 gmppath.Owns = function() return true end
@@ -25,6 +26,7 @@ game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
 	   getgenv().justExecuted = true
 	end
 	writefile("Pet-SimX-Keybind.lua", mainString)
+	getgenv().canExecute = true
     end
 end)
 
@@ -36,6 +38,7 @@ if isfile("Pet-SimX-Keybind.lua") then
 end
 
 repeat wait() until getgenv().bind ~= ""
+repeat wait() until getgenv().canExecute == true
 
 if getgenv().justExecuted == true then
    wait(1.25)
