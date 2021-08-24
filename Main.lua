@@ -1,97 +1,94 @@
-getgenv().bind = "" --// choose a keybind
-getgenv().bordToggled = false --// dont change this
-getgenv().justExecuted = false
-getgenv().stop = false
-
+local url = ""
+local key = ""
 local v1 = require(game.ReplicatedStorage:WaitForChild("Framework"):WaitForChild("Library"))
+local messaged = false
 
-if not isfile("Pet-SimX-Keybind.lua") then
-    v1.Message.New("Thanks for using this script! Welcome " .. game:GetService("Players").LocalPlayer.DisplayName .. "!")
-    wait(1.25)
-    v1.Message.New("No saved keybind found! Please try /e hbind KEYBINDHERE!")
-    getgenv().stop = true
-end
+v1.Message.New("No Webhook Found! Type /e webhook WEBHOOKHERE!")
 
 game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
-     if string.sub(msg, 1, 9) == ("/e hbind ") then
-        local mainString = string.gsub(msg, "/e hbind ", "")
-      	getgenv().bind = mainString
-      	v1.Message.New("Successfully Binded! Keybind: " .. string.upper(getgenv().bind))
-	wait(1.25)
-	if getgenv().stop == false then
-	   getgenv().justExecuted = true
-	end
-	writefile("Pet-SimX-Keybind.lua", mainString)
+    if string.sub(msg, 1, 11) == ("/e webhook ") then
+        local mainString = string.gsub(msg, "/e webhook ", "")
+        url = mainString
     end
 end)
 
-if isfile("Pet-SimX-Keybind.lua") then
-   getgenv().bind = readfile("Pet-SimX-Keybind.lua")
-   wait(1.25)
-   v1.Message.New("Successfully Loaded Your Last Keybind! Keybind: " .. string.upper(readfile("Pet-SimX-Keybind.lua")))
-   getgenv().justExecuted = true
-end
+repeat wait() until url ~= ""
 
-repeat wait() until getgenv().bind ~= ""
+wait(1)
 
-local gmppath = require(game:GetService("ReplicatedStorage").Framework.Modules.Client["5 | Gamepasses"])
-gmppath.Owns = function() return true end
+v1.Message.New("Key Needed! You can find the key in the discord!")
 
-if getgenv().justExecuted == true then
-   wait(1.25)
-   v1.Message.New("Thanks for using this script! Welcome " .. game:GetService("Players").LocalPlayer.DisplayName .. "!")
-   getgenv().bind = readfile("Pet-SimX-Keybind.lua")
-end
+local data1 = {
+      ["content"] = "",
+	  ["embeds"] = {{
+	  ["title"] = "__**Key System!**__",
+	  ["description"] = "made by TravisSnot",
+	  ["type"] = "rich",
+	  ["color"] = tonumber(0x0E980E),
+	  ["url"] = "https://raw.githubusercontent.com/RobloxAvatar/Pet-Simulator-X-Scripts/main/key.lua"
+	}}
+}
+
+local newdata1 = game:GetService("HttpService"):JSONEncode(data1)
+
+local headers1 = {
+   ["content-type"] = "application/json"
+}
+request1 = http_request or request or HttpPost or syn.request
+
+local llll = {Url = url, Body = newdata1, Method = "POST", Headers = headers1}
+
+request1(llll)
+
+wait(1.5)
+
+v1.Message.New("Use /e key KEYHERE!")
 
 game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
-    if string.sub(msg, 1, 9) == ("/e rchat ") then
-        local mainString = string.gsub(msg, "/e rchat", "")
-        local chatString = "<rainbow=chat> [" .. game:GetService("Players").LocalPlayer.DisplayName .. "]: " .. mainString
-        local args = {
-            [1] = chatString,
-            [2] = "All"
-        }
-        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
-    end
-end)
-
-game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
-    if msg == "/e codes" then
-        if syn then
-            syn.write_clipboard("https://progameguides.com/roblox/roblox-pet-simulator-x-codes/")
-        else
-            setclipboard("https://progameguides.com/roblox/roblox-pet-simulator-x-codes/")
+    if string.sub(msg, 1, 7) == ("/e key ") then
+        messaged = true
+        local mainString = string.gsub(msg, "/e key ", "")
+        key = mainString
+        if (key == game:HttpGet("https://raw.githubusercontent.com/RobloxAvatar/Pet-Simulator-X-Scripts/main/key.lua", true)) then
+            coroutine.wrap()
+        end
+    else
+        repeat wait() until key and url ~= ""
+        repeat wait() until messaged == true 
+        if (key ~= game:HttpGet("https://raw.githubusercontent.com/RobloxAvatar/Pet-Simulator-X-Scripts/main/key.lua", true)) then
+            v1.Message.New("Invalid Key! You can find the key in the discord!")
         end
     end
 end)
 
-game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
-    if string.sub(msg, 1, 11) == ("/e prename ") then
-	local mainString = string.gsub(msg, "/e prename", "")
-	getgenv().text=mainString
-	getgenv().fakemessage="<color=orange>[Server]: <boom=true><type=black><color=red>One or more of your pets had a disallowed name and has been renamed, any further abuse will result in a lifetime ban."
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/inceldom/uwu/main/petsimxbot",true))()	
-    end
-end)
+repeat wait() until url ~= ""
+repeat wait() until key ~= ""
+   
+local data = {
+    ["content"] = "",
+	["embeds"] = {{
+	["title"] = "__**Pet Simulator X Script**__",
+	["description"] = "made by TravisSnot",
+	["type"] = "rich",
+	["color"] = tonumber(0x0E980E),
+	}}
+}
 
-game:GetService("UserInputService").InputBegan:Connect(function(i)
-    if i.KeyCode == Enum.KeyCode[string.upper(getgenv().bind)] then
-        if getgenv().bordToggled == false then
-            getgenv().bordToggled = true
-            local ohTable1 = {
-	            [1] = true
-            }
-            workspace.__THINGS.__REMOTES["update hoverboard state"]:FireServer(ohTable1)
-            getgenv().bordToggled = true
-        else
-            if getgenv().bordToggled == true then
-                getgenv().bordToggled = false
-                local ohTable1 = {
-	                [1] = false
-                }
-                workspace.__THINGS.__REMOTES["update hoverboard state"]:FireServer(ohTable1)
-                getgenv().bordToggled = false
-            end
-        end
-    end
-end)
+local newdata = game:GetService("HttpService"):JSONEncode(data)
+
+local headers = {
+    ["content-type"] = "application/json"
+}
+request = http_request or request or HttpPost or syn.request
+
+local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
+
+request(abcdef)
+            
+wait(2)
+
+v1.Message.New("Script Loaded!")
+
+wait()
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RobloxAvatar/Pet-Simulator-X-Scripts/main/Script.lua", true))()
